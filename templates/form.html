@@ -9,6 +9,13 @@
 {% block body %}
 <body> <center>
     <b>LOGIN</b> <br> <br>
+    <!--get flashed messages -->
+    {% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+    {% endwith %}
+    
     <form action="/auth" method="POST">
       Username:
       <input type="text" name="username" size="20"> <br><br>

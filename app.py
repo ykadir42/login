@@ -3,7 +3,7 @@
 #HW8 -- Do I Know You?
 #2017-10-04
 
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 import os
 
 app = Flask(__name__)
@@ -26,11 +26,13 @@ def form():
 		return redirect(url_for("hello"))
 	return render_template("form.html")
 
+'''
 @app.route("/error")
 def error():
-	if 'username' in session:
-		return redirect(url_for("hello"))
-	return render_template("error.html", error = session['error'])
+	if 'username' not in session:
+	        return render_template("error.html", error = session['error'])
+	return redirect(url_for("hello"))
+'''
 
 @app.route("/auth", methods=["POST"])
 def auth():
@@ -50,15 +52,17 @@ def auth():
 		    print session
 		    return redirect(url_for("hello"))
 		else:
-			session['error'] = 'Wrong Password'
-			return redirect(url_for('error'))
+			flash('Wrong Password')
+			return redirect(url_for('form'))
 	else:
-		session['error'] = 'Wrong Username'
-		return redirect(url_for('error'))
+		flash('Wrong Username')
+		return redirect(url_for('form'))
 
 #welcome page
 @app.route("/hello")
 def hello():
+        if 'username' not in session :
+                return redirect(url_for("form"))
 	return render_template("hello.html", username = session['username'])
 
 #exit page
@@ -67,6 +71,8 @@ def goodbye():
 	#logs out user
 	session.pop('username')
 	return redirect(url_for("form"))
+
+        
 
 if __name__ == "__main__":
 	app.debug = True
