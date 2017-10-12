@@ -1,12 +1,14 @@
-<!DOCTYPE HTML>
-<html>
+{% extends "temp.html" %}
 
-  <head>
-    <title> LOGIN PAGE </title>
-  </head>
+<head>
+  {% block title %} 
+  <title> LOGIN PAGE </title>
+  {% endblock %}
+</head>
 
-  <body> <center>
-      <b>LOGIN</b> <br> <br>
+{% block body %}
+<body> <center>
+    <b>LOGIN</b> <br> <br>
     <form action="/auth" method="POST">
       Username:
       <input type="text" name="username" size="20"> <br><br>
@@ -15,6 +17,7 @@
       <input type="submit" name="Submit">
     </form>
     <br>
-  </center></body>
+</center></body>
+</body>
+{% endblock %}
 
-</html>

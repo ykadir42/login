@@ -1,17 +1,20 @@
-<!DOCTYPE HTML>
-<html>
+{% extends "temp.html" %}
 
-  <head>
-    <title> ERROR </title>
-  </head>
+<head>
+  {% block title %} 
+  <title> ERROR </title>
+  {% endblock %}
+</head>
 
-  <body> <center>
-      <b>ERROR</b> <br> <br>
-      {{error}}
+{% block body %}
+<body> <center>
+    <b>ERROR</b> <br> <br>
+    {{error}}
     <form action="/form" method="POST">
       <input type="submit" value="Go Back">
     </form>
     <br>
-  </body>
+</body>
+{% endblock %}
 
-</html>
+
